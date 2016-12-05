@@ -2,8 +2,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var {Route, Router, IndexRoute, hashHistory} = require('react-router');
 
-var TodoApp = require('TodoApp');
-
 // //load foundation 
 // require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation()
@@ -12,7 +10,8 @@ $(document).foundation()
 require('style!css!sass!applicationStyles')
 
 ReactDOM.render(
-    <TodoApp />,
+    <p>React Redux Learn</p>,
     document.getElementById('app')
 );
   
+require('./redux-example.jsx');
