@@ -5,11 +5,43 @@ console.log('starting redux example');
 var reducer = (state = {name: 'Anonymous'},action) => {
     // state = state || {name: 'Anonymous'};
     
+    console.log('new action ',action);
 
-
-    return state;
+    switch(action.type){
+        case 'CHANGE_NAME':
+            return{
+                ...state,
+                searchText:action.searchText
+            };
+        dafault:
+            return state;
+    }
 };
-var store = redux.createStore();
+
+var store = redux.createStore(reducer,redux.compose(
+    window.devToolsExtension ? window.devToolsExtension() : f=>f
+));
+
+//subscribe to change
+var unsubscribe = store.subscribe(()=>{
+    var state = store.getState();
+
+    console.log('name is ',state.name);
+    document.getElementById('app').innerHTML=state.name;
+});
+//unsubscribe();
 
 var currentState = store.getState();
 console.log('currentState',currentState);
+
+store.dispatch({
+    type:'CHANGE_NAME',
+    name: 'Andrew'
+});
+
+store.dispatch({
+    type:'CHANGE_NAME',
+    name: 'emily'
+});
+
+console.log('name should be andrew',store.getState());
